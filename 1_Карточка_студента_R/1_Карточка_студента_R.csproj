@@ -6,4 +6,7 @@
     <RootNamespace>_1_Карточка_студента_R</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Student\Student.csproj" />
+  </ItemGroup>
 </Project>
