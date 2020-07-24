@@ -7,6 +7,7 @@ namespace _1_Карточка_студента_R
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
+            //111
         }
     }
 }
