@@ -11,8 +11,7 @@ namespace _1_Карточка_студента_R
     {
         static async Task Main(string[] args)
         {
-            List<StudentDTO> students = new List<StudentDTO>();
-            ///121
+            //List<StudentDTO> students = new List<StudentDTO>();            
             StudentDTO ivan = new StudentDTO()
             {
                 FIO = "Иванов Иван Иванович",
