@@ -8,6 +8,7 @@ namespace _1_Карточка_студента_R
         {
             Console.WriteLine("Hello World!");
             //111
+            ///121212
         }
     }
 }
