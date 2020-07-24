@@ -33,8 +33,8 @@ namespace _1_Карточка_студента_R
                     Phone = 89620000006,
                     Email = "ivan@mail.ru"
                 }
-
-            };
+            };            
+                Console.WriteLine(ivan);
             using (FileStream fs = new FileStream("student.json", FileMode.OpenOrCreate))
             {
                 var options = new JsonSerializerOptions
@@ -50,14 +50,14 @@ namespace _1_Карточка_студента_R
             }
             using (FileStream fs = new FileStream("student.json", FileMode.OpenOrCreate))
             {
-                var options = new JsonSerializerOptions
-                {
-                    WriteIndented = true
-                };
-                StudentDTO student = await JsonSerializer.DeserializeAsync<StudentDTO>(fs, options);
-                Console.WriteLine($"FIO: {student.FIO}, Faculty: {student.curriculum.Faculty}, Speciality: {student.curriculum.Speciality}," +
-                    $" Course: {student.curriculum.Course}, Gpoup: {student.curriculum.Group}, City: {student.address.City}, PostIndex: {student.address.PostIndex}, " +
-                    $"Street: {student.address.Street}, Phone: {student.contact.Phone}, Email: {student.contact.Email}");
+                //var options = new JsonSerializerOptions
+                //{
+                //    WriteIndented = true
+                //};
+                StudentDTO student = await JsonSerializer.DeserializeAsync<StudentDTO>(fs);               
+                //Console.WriteLine($"FIO: {student.FIO}, Faculty: {student.curriculum.Faculty}, Speciality: {student.curriculum.Speciality}," +
+                //    $" Course: {student.curriculum.Course}, Gpoup: {student.curriculum.Group}, City: {student.address.City}, PostIndex: {student.address.PostIndex}, " +
+                //    $"Street: {student.address.Street}, Phone: {student.contact.Phone}, Email: {student.contact.Email}");
             }
         }
     }
