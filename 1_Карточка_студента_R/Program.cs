@@ -11,7 +11,8 @@ namespace _1_Карточка_студента_R
     {
         static async Task Main(string[] args)
         {
-            //List<StudentDTO> students = new List<StudentDTO>();            
+            StudentDTO[] students = new StudentDTO[5];    
+
             StudentDTO ivan = new StudentDTO()
             {
                 FIO = "Иванов Иван Иванович",
@@ -33,9 +34,33 @@ namespace _1_Карточка_студента_R
                     Phone = 89620000006,
                     Email = "ivan@mail.ru"
                 }
-            };            
-                Console.WriteLine(ivan);
-            using (FileStream fs = new FileStream("student.json", FileMode.OpenOrCreate))
+            };
+
+            StudentDTO nik = new StudentDTO()
+            {
+                FIO = "Рашевский Никита Сергеевич",
+                curriculum = new Сurriculum()
+                {
+                    Faculty = "Химическая технолоигия",
+                    Speciality = "Переработка нефти",
+                    Course = 2,
+                    Group = "хтл-мо-18-1"
+                },
+                address = new Address()
+                {
+                    City = "Ставрополь",
+                    PostIndex = 355000,
+                    Street = "Ленина"
+                },
+                contact = new Contacts()
+                {
+                    Phone = 89629999999,
+                    Email = "nik@mail.ru"
+                }
+            };
+            students[1] = ivan;
+            students[2] = nik;            
+            using (FileStream fs = new FileStream("ivan.json", FileMode.OpenOrCreate))
             {
                 var options = new JsonSerializerOptions
                 {
@@ -46,18 +71,33 @@ namespace _1_Карточка_студента_R
 
                 Console.WriteLine("Сохранено в файл");
                 Console.WriteLine($"{ivan.curriculum.Faculty}, {ivan.curriculum.Speciality}," +
-                    $"{ ivan.curriculum.Course} { ivan.curriculum.Group}");
+                    $"{ ivan.curriculum.Course}, { ivan.curriculum.Group}");
+                Console.WriteLine();
             }
-            using (FileStream fs = new FileStream("student.json", FileMode.OpenOrCreate))
+            using (FileStream fs = new FileStream("nik.json", FileMode.OpenOrCreate))
             {
                 var options = new JsonSerializerOptions
                 {
                     WriteIndented = true
                 };
-                StudentDTO student = await JsonSerializer.DeserializeAsync<StudentDTO>(fs, options);
-                Console.WriteLine($"FIO: {student.FIO}, Faculty: {student.curriculum.Faculty}, Speciality: {student.curriculum.Speciality}," +
-                    $" Course: {student.curriculum.Course}, Gpoup: {student.curriculum.Group}, City: {student.address.City}, PostIndex: {student.address.PostIndex}, " +
-                    $"Street: {student.address.Street}, Phone: {student.contact.Phone}, Email: {student.contact.Email}");
+
+                await JsonSerializer.SerializeAsync<StudentDTO>(fs, students[2], options);
+
+                Console.WriteLine("Сохранено в файл");
+                Console.WriteLine($"{nik.curriculum.Faculty}, {nik.curriculum.Speciality}," +
+                    $"{ nik.curriculum.Course}, { nik.curriculum.Group}");
+                Console.WriteLine();
+            }
+            using (FileStream fs = new FileStream("nik.json", FileMode.OpenOrCreate))
+            {
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                StudentDTO student = await JsonSerializer.DeserializeAsync<StudentDTO>(fs, options);// нужна ли здесь options?
+                Console.WriteLine($"FIO: {student.FIO},\n Curriculum\nFaculty: {student.curriculum.Faculty},\nSpeciality: {student.curriculum.Speciality},\n" +
+                    $"Course: {student.curriculum.Course},\nGpoup: {student.curriculum.Group},\n Address\nCity: {student.address.City},\nPostIndex: {student.address.PostIndex},\n" +
+                    $"Street: {student.address.Street},\n Contact\nPhone: {student.contact.Phone},\nEmail: {student.contact.Email}");
                 
             }
         }
