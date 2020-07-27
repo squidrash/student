@@ -5,9 +5,9 @@ namespace Student
     public class StudentDTO
     {
         public string FIO { get; set; }
-        public Сurriculum curriculum;
-        public Address address;
-        public Contacts contact;
+        public Сurriculum curriculum { get; set; }
+        public Address address { get; set; }
+        public Contacts contact { get; set; }
     }
 
     public class Сurriculum
