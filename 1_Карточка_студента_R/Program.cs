@@ -12,8 +12,8 @@ namespace _1_Карточка_студента_R
         static async Task Main(string[] args)
         {
             Console.WriteLine("Начало Main");
-             await StudentAsync.ReadWriteAsync();
-            Console.WriteLine("Конец Main");
+            await StudentAsync.ReadWriteAsync();            
+            Console.WriteLine("Конец Main");            
         }       
         
     }

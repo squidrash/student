@@ -2,15 +2,15 @@
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.IO;
+using System.Collections.Generic;
 namespace Student
 {
     public class StudentAsync
     {
          public static async Task ReadWriteAsync()
          {
-            StudentDTO[] students = new StudentDTO[5];
-
-            StudentDTO ivan = new StudentDTO()
+            List<StudentDTO> students = new List<StudentDTO>();
+            students.Add(new StudentDTO()
             {
                 FIO = "Иванов Иван Иванович",
                 curriculum = new Сurriculum()
@@ -31,14 +31,13 @@ namespace Student
                     Phone = 89620000006,
                     Email = "ivan@mail.ru"
                 }
-            };
-
-            StudentDTO nik = new StudentDTO()
+            });
+            students.Add(new StudentDTO()
             {
                 FIO = "Рашевский Никита Сергеевич",
                 curriculum = new Сurriculum()
                 {
-                    Faculty = "Химическая технолоигия",
+                    Faculty = "Химическая технология",
                     Speciality = "Переработка нефти",
                     Course = 2,
                     Group = "хтл-мо-18-1"
@@ -54,9 +53,14 @@ namespace Student
                     Phone = 89629999999,
                     Email = "nik@mail.ru"
                 }
-            };
-            students[1] = ivan;
-            students[2] = nik;
+            });
+            StudentDTO ivan = students[0];
+            StudentDTO nik = students[1];
+            foreach (StudentDTO s in students)
+            {
+                Console.WriteLine(s.FIO);
+            }
+
             using (FileStream fs = new FileStream("ivan.json", FileMode.OpenOrCreate))
             {
                 var options = new JsonSerializerOptions
@@ -78,7 +82,7 @@ namespace Student
                     WriteIndented = true
                 };
 
-                await JsonSerializer.SerializeAsync<StudentDTO>(fs, students[2], options);
+                await JsonSerializer.SerializeAsync<StudentDTO>(fs, nik, options);
 
                 Console.WriteLine("Сохранено в файл");
                 Console.WriteLine($"{nik.curriculum.Faculty}, {nik.curriculum.Speciality}," +
